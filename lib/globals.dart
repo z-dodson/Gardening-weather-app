@@ -1,3 +1,7 @@
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'dart:async';
+
 // All the globals in one great and lovly file
 
 // ! Some global variables to run though the whole program
@@ -50,3 +54,5 @@ bool GlobalSeriousNotifications = true;
 double currentWindSpeed = 1;
 double currentTemperature = 1;
 double currentChanceOfRain = 1;
+
+Color THEcolor = Color.fromARGB(255, 172, 223, 135);
