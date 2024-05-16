@@ -10,11 +10,34 @@ String rainfallUnits = "mm";//inches
 // * Global unit settings
 enum TempertureUnits { C, F }
 enum WindUnits { mph, kmph, mps }
-enum Rainfall { mm, inch }
+enum RainfallUnits { mm, inch }
+String getStringUnitsTemp(TempertureUnits thing){
+  if (thing==TempertureUnits.C){
+    return "°C";
+  }else if(thing==TempertureUnits.F){
+    return "°F";
+  } return "";
+}
+String getStringUnitsWind(WindUnits thing){
+  if (thing==WindUnits.mph){
+    return "m/h";
+  }else if(thing==WindUnits.kmph){
+    return "km/h";
+  }else if(thing==WindUnits.mps){
+    return "m/s";
+  } return "";
+}
+String getStringUnitsRain(RainfallUnits thing){
+  if (thing==RainfallUnits.mm){
+    return "mm";
+  }else if(thing==RainfallUnits.inch){
+    return "inch";
+  } return "";
+}
 
 WindUnits GlobalWindUnits = WindUnits.mph;
 TempertureUnits GlobalTempretureUnits = TempertureUnits.C;
-Rainfall GlobalOtherUnits = Rainfall.mm;
+RainfallUnits GlobalOtherUnits = RainfallUnits.mm;
 
 // * Global notification settings
 
