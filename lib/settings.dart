@@ -48,7 +48,7 @@ class _SettingsPageState extends State<SettingsPage> {
       ),
       body: Center( 
         child: Column( 
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
           Text('Unit settings'),
           Column(
@@ -215,29 +215,29 @@ class SegmentedButtonRainfall extends StatefulWidget {
 
 
 class _SegmentedButtonRainfallState extends State<SegmentedButtonRainfall> {
-  Rainfall tempView = Rainfall.mm;
+  RainfallUnits tempView = RainfallUnits.mm;
 
   @override
   Widget build(BuildContext context) {
-    return SegmentedButton<Rainfall>(
+    return SegmentedButton<RainfallUnits>(
       style: SegmentedButton.styleFrom(
         backgroundColor: Colors.grey[200],
         foregroundColor: Colors.red,
         selectedForegroundColor: Colors.white,
         selectedBackgroundColor: Colors.green,
       ),
-      segments: const <ButtonSegment<Rainfall>>[
-        ButtonSegment<Rainfall>(
-            value: Rainfall.mm,
+      segments: const <ButtonSegment<RainfallUnits>>[
+        ButtonSegment<RainfallUnits>(
+            value: RainfallUnits.mm,
             label: Text('mm'),
         ),
-        ButtonSegment<Rainfall>(
-            value: Rainfall.inch,
+        ButtonSegment<RainfallUnits>(
+            value: RainfallUnits.inch,
             label: Text('inch'),
         ),
       ],
-      selected: <Rainfall>{tempView},
-      onSelectionChanged: (Set<Rainfall> newSelection) {
+      selected: <RainfallUnits>{tempView},
+      onSelectionChanged: (Set<RainfallUnits> newSelection) {
         setState(() {
           // By default there is only a single segment that can be
           // selected at one time, so its value is always the first
