@@ -10,11 +10,11 @@ String rainfallUnits = "mm";//inches
 // * Global unit settings
 enum TempertureUnits { C, F }
 enum WindUnits { mph, kmph, mps }
-enum OtherUnits { C, F }
+enum Rainfall { mm, inch }
 
 WindUnits GlobalWindUnits = WindUnits.mph;
 TempertureUnits GlobalTempretureUnits = TempertureUnits.C;
-OtherUnits GlobalOtherUnits = OtherUnits.C;
+Rainfall GlobalOtherUnits = Rainfall.mm;
 
 // * Global notification settings
 

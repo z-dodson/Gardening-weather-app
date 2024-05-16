@@ -5,8 +5,12 @@ import 'globals.dart';
 
 void main() {
   runApp(MyWeatherApp());
-}
+  // We want a every update call to the API
 
+}
+void update(){
+
+}
 
 class MyWeatherApp extends StatelessWidget {
   @override

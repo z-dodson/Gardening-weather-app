@@ -61,7 +61,7 @@ class _SettingsPageState extends State<SettingsPage> {
                 children: [Text('WindSpeed'), SegmentedButtonWind()]),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [Text('Tempreture'), SegmentedButtonExample()])
+                children: [Text('Rainfall'), SegmentedButtonRainfall()])
               
             ],
             ),
@@ -205,39 +205,39 @@ class _SegmentedButtonWindState extends State<SegmentedButtonWind> {
   }
 }
 
-class SegmentedButtonExample extends StatefulWidget {
-  const SegmentedButtonExample({super.key});
+class SegmentedButtonRainfall extends StatefulWidget {
+  const SegmentedButtonRainfall({super.key});
 
   @override
-  State<SegmentedButtonExample> createState() => _SegmentedButtonExampleState();
+  State<SegmentedButtonRainfall> createState() => _SegmentedButtonRainfallState();
 }
 
 
 
-class _SegmentedButtonExampleState extends State<SegmentedButtonExample> {
-  OtherUnits tempView = OtherUnits.C;
+class _SegmentedButtonRainfallState extends State<SegmentedButtonRainfall> {
+  Rainfall tempView = Rainfall.mm;
 
   @override
   Widget build(BuildContext context) {
-    return SegmentedButton<OtherUnits>(
+    return SegmentedButton<Rainfall>(
       style: SegmentedButton.styleFrom(
         backgroundColor: Colors.grey[200],
         foregroundColor: Colors.red,
         selectedForegroundColor: Colors.white,
         selectedBackgroundColor: Colors.green,
       ),
-      segments: const <ButtonSegment<OtherUnits>>[
-        ButtonSegment<OtherUnits>(
-            value: OtherUnits.C,
-            label: Text('C'),
+      segments: const <ButtonSegment<Rainfall>>[
+        ButtonSegment<Rainfall>(
+            value: Rainfall.mm,
+            label: Text('mm'),
         ),
-        ButtonSegment<OtherUnits>(
-            value: OtherUnits.F,
-            label: Text('F'),
+        ButtonSegment<Rainfall>(
+            value: Rainfall.inch,
+            label: Text('inch'),
         ),
       ],
-      selected: <OtherUnits>{tempView},
-      onSelectionChanged: (Set<OtherUnits> newSelection) {
+      selected: <Rainfall>{tempView},
+      onSelectionChanged: (Set<Rainfall> newSelection) {
         setState(() {
           // By default there is only a single segment that can be
           // selected at one time, so its value is always the first
