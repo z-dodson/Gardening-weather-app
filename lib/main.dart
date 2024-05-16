@@ -22,8 +22,22 @@ class MyWeatherApp extends StatelessWidget {
 String temperatureUnits = "°C";//°F
 String speedUnits = "km/h";//mph
 String rainfallUnits = "mm";//inches
+// NOTE: Not quite sure why we're storing in string, shouldn't we hve a converter function?? -ZD
 
-// Note: Do we actually want these as globals, shouldn't they be paramerters to update function? - ZD
+// * Global unit settings
+
+WindUnits GlobalWindUnits = WindUnits.mph;
+TempertureUnits GlobalTempretureUnits = TempertureUnits.C;
+OtherUnits GlobalOtherUnits = OtherUnits.C;
+
+// * Global notification settings
+
+bool GlobalAllowNotifications = true;
+bool GlobalRegularRemienders = true;
+bool GlobalSeriousNotifications = true;
+
+
+// NOTE: Do we actually want these as globals, shouldn't they be paramerters to update function? - ZD
 double currentWindSpeed = 1;
 double currentTemperature = 1;
 double currentChanceOfRain = 1;
@@ -186,30 +200,31 @@ class _SettingsPageState extends State<SettingsPage> {
             children: [
               SwitchListTile(
                 title: Text('Allow Notifications'),
-                value: useMetric,
+                value: GlobalAllowNotifications,
                 onChanged: (value) {
                   setState(() {
-                    useMetric = value;
+                    GlobalAllowNotifications = value;
                   });
                   // You can perform additional actions based on the toggle state
                 },
               ),
               SwitchListTile(
                 title: Text('Regular reminders'),
-                value: useMetric,
+                value: GlobalRegularRemienders,
                 onChanged: (value) {
                   setState(() {
-                    useMetric = value;
+                    GlobalRegularRemienders = value;
+
                   });
                   // You can perform additional actions based on the toggle state
                 },
               ),
               SwitchListTile(
                 title: Text('Serious warnings'),
-                value: useMetric,
+                value: GlobalSeriousNotifications,
                 onChanged: (value) {
                   setState(() {
-                    useMetric = value;
+                    GlobalSeriousNotifications = value;
                   });
                   // You can perform additional actions based on the toggle state
                 },
@@ -264,6 +279,7 @@ class _SegmentedButtonTempretureState extends State<SegmentedButtonTempreture> {
           // selected at one time, so its value is always the first
           // item in the selected set.
           tempView = newSelection.first;
+          GlobalTempretureUnits = tempView;
         });
       },
     );
@@ -313,6 +329,7 @@ class _SegmentedButtonWindState extends State<SegmentedButtonWind> {
           // selected at one time, so its value is always the first
           // item in the selected set.
           tempView = newSelection.first;
+          GlobalWindUnits = tempView;
         });
       },
     );
@@ -330,34 +347,35 @@ class SegmentedButtonExample extends StatefulWidget {
 enum OtherUnits { C, F }
 
 class _SegmentedButtonExampleState extends State<SegmentedButtonExample> {
-  TempertureUnits tempView = TempertureUnits.C;
+  OtherUnits tempView = OtherUnits.C;
 
   @override
   Widget build(BuildContext context) {
-    return SegmentedButton<TempertureUnits>(
+    return SegmentedButton<OtherUnits>(
       style: SegmentedButton.styleFrom(
         backgroundColor: Colors.grey[200],
         foregroundColor: Colors.red,
         selectedForegroundColor: Colors.white,
         selectedBackgroundColor: Colors.green,
       ),
-      segments: const <ButtonSegment<TempertureUnits>>[
-        ButtonSegment<TempertureUnits>(
-            value: TempertureUnits.C,
+      segments: const <ButtonSegment<OtherUnits>>[
+        ButtonSegment<OtherUnits>(
+            value: OtherUnits.C,
             label: Text('C'),
         ),
-        ButtonSegment<TempertureUnits>(
-            value: TempertureUnits.F,
+        ButtonSegment<OtherUnits>(
+            value: OtherUnits.F,
             label: Text('F'),
         ),
       ],
-      selected: <TempertureUnits>{tempView},
-      onSelectionChanged: (Set<TempertureUnits> newSelection) {
+      selected: <OtherUnits>{tempView},
+      onSelectionChanged: (Set<OtherUnits> newSelection) {
         setState(() {
           // By default there is only a single segment that can be
           // selected at one time, so its value is always the first
           // item in the selected set.
           tempView = newSelection.first;
+          GlobalOtherUnits = tempView;
         });
       },
     );
