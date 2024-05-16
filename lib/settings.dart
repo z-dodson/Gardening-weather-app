@@ -121,7 +121,7 @@ class SegmentedButtonTempreture extends StatefulWidget {
 
 
 class _SegmentedButtonTempretureState extends State<SegmentedButtonTempreture> {
-  TempertureUnits tempView = TempertureUnits.C;
+  TempertureUnits tempView = GlobalTempretureUnits;
 
   @override
   Widget build(BuildContext context) {
@@ -166,7 +166,7 @@ class SegmentedButtonWind extends StatefulWidget {
 
 
 class _SegmentedButtonWindState extends State<SegmentedButtonWind> {
-  WindUnits tempView = WindUnits.mph;
+  WindUnits tempView = GlobalWindUnits;
 
   @override
   Widget build(BuildContext context) {
@@ -215,7 +215,7 @@ class SegmentedButtonRainfall extends StatefulWidget {
 
 
 class _SegmentedButtonRainfallState extends State<SegmentedButtonRainfall> {
-  RainfallUnits tempView = RainfallUnits.mm;
+  RainfallUnits tempView = GlobalRainUnits;
 
   @override
   Widget build(BuildContext context) {
@@ -243,7 +243,7 @@ class _SegmentedButtonRainfallState extends State<SegmentedButtonRainfall> {
           // selected at one time, so its value is always the first
           // item in the selected set.
           tempView = newSelection.first;
-          GlobalOtherUnits = tempView;
+          GlobalRainUnits = tempView;
         });
       },
     );

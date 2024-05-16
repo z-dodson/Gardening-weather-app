@@ -37,7 +37,7 @@ String getStringUnitsRain(RainfallUnits thing){
 
 WindUnits GlobalWindUnits = WindUnits.mph;
 TempertureUnits GlobalTempretureUnits = TempertureUnits.C;
-RainfallUnits GlobalOtherUnits = RainfallUnits.mm;
+RainfallUnits GlobalRainUnits = RainfallUnits.mm;
 
 // * Global notification settings
 
