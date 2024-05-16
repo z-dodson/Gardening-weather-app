@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'dart:async';
 import 'settings.dart';
 import 'globals.dart';
 
@@ -44,8 +45,17 @@ class WeatherHomePage extends StatefulWidget {
 }
 
 class _WeatherHomePageState extends State<WeatherHomePage> {
+
+  void _update() {
+    setState(() {
+      
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    Object a = Timer.periodic(const Duration(milliseconds: 500), (timer) => _update());
+  
     return Scaffold(
       appBar: AppBar(
         title: Text('FloraForcast'),
@@ -81,9 +91,9 @@ class __WeatherBodyState extends State<_WeatherBody> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text('Wind: ' + currentWindSpeed.toString() + " " + speedUnits),
-              Text('Temperature: ' + getTemperatureInCorrectUnits(currentTemperature).toString() + temperatureUnits),
-              Text('Chance of Rain: ' + (currentChanceOfRain * 100).toString() + "%"),
+              Text('Wind: ' + currentWindSpeed.toString() + " " + getStringUnitsWind(GlobalWindUnits)),
+              Text('Temperature: ' + getTemperatureInCorrectUnits(currentTemperature).toString() + getStringUnitsTemp(GlobalTempretureUnits)),
+              Text('Chance of Rain: ' + getStringUnitsRain(GlobalRainUnits) + "%"),
             ],
           ),
         ),
