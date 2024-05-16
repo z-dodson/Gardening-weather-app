@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'settings.dart';
-import 'globals.dart'
+import 'globals.dart';
+
 void main() {
   runApp(MyWeatherApp());
 }
@@ -18,6 +19,14 @@ class MyWeatherApp extends StatelessWidget {
     );
   }
 }
+
+String temperatureUnits = "°C";//°F
+String speedUnits = "km/h";//mph
+String rainfallUnits = "mm";//inches
+
+double currentWindSpeed = 1;
+double currentTemperature = 1;
+double currentChanceOfRain = 1;
 
 double getTemperatureInCorrectUnits(double val){
   if (temperatureUnits == "°C") return val;
@@ -80,9 +89,9 @@ class __WeatherBodyState extends State<_WeatherBody> {
           child: ListView(
             scrollDirection: Axis.horizontal,
             children: [
-              WeatherCard(day: "Temperature", icon: const IconData(0),temperature: "a",),
-              WeatherCard(day: "Rain Chance", icon: const IconData(0),temperature: "a",),
-              WeatherCard(day: "Wind speed", icon: const IconData(0),temperature: "a",),
+              WeatherCard(day: "Temperature", icon: Icons.thermostat, temperature: "a",),
+              WeatherCard(day: "Rain Chance", icon: Icons.grain, temperature: "a",),
+              WeatherCard(day: "Wind speed", icon: Icons.speed, temperature: "a",),
               // Daily weather cards
               // Example: WeatherCard(day: 'Monday', icon: Icons.wb_sunny, temperature: '80°F'),
               // Add more cards for other days
@@ -91,13 +100,34 @@ class __WeatherBodyState extends State<_WeatherBody> {
         ),
         // Weekly weather carousel
         Container(
-          height: 1,
-          width: 200,
+          height: 150, // Adjust height as needed
           child: ListView(
             scrollDirection: Axis.horizontal,
             children: [
+              WeatherCard(day: 'Monday', icon: Icons.wb_sunny, temperature: 'High: 80°F, Low: 60°F'),
+              WeatherCard(day: 'Tuesday', icon: Icons.cloud, temperature: 'High: 75°F, Low: 55°F'),
+              WeatherCard(day: 'Wednesday', icon: Icons.wb_sunny, temperature: 'High: 82°F, Low: 62°F'),
+              WeatherCard(day: 'Thursday', icon: Icons.cloud, temperature: 'High: 78°F, Low: 58°F'),
+              WeatherCard(day: 'Friday', icon: Icons.wb_sunny, temperature: 'High: 79°F, Low: 61°F'),
+              WeatherCard(day: 'Saturday', icon: Icons.cloud, temperature: 'High: 77°F, Low: 59°F'),
+              WeatherCard(day: 'Sunday', icon: Icons.wb_sunny, temperature: 'High: 81°F, Low: 63°F'),
               // Weekly weather cards
-              // Example: WeatherCard(day: 'Monday', icon: Icons.wb_sunny, temperature: 'High: 80°F, Low: 60°F'),
+              // Add more cards for other days
+            ],
+          ),
+        ),Container(
+          height: 150, // Adjust height as needed
+          child: ListView(
+            scrollDirection: Axis.horizontal,
+            children: [
+              WeatherCard(day: 'Monday', icon: Icons.wb_sunny, temperature: 'High: 80°F, Low: 60°F'),
+              WeatherCard(day: 'Tuesday', icon: Icons.cloud, temperature: 'High: 75°F, Low: 55°F'),
+              WeatherCard(day: 'Wednesday', icon: Icons.wb_sunny, temperature: 'High: 82°F, Low: 62°F'),
+              WeatherCard(day: 'Thursday', icon: Icons.cloud, temperature: 'High: 78°F, Low: 58°F'),
+              WeatherCard(day: 'Friday', icon: Icons.wb_sunny, temperature: 'High: 79°F, Low: 61°F'),
+              WeatherCard(day: 'Saturday', icon: Icons.cloud, temperature: 'High: 77°F, Low: 59°F'),
+              WeatherCard(day: 'Sunday', icon: Icons.wb_sunny, temperature: 'High: 81°F, Low: 63°F'),
+              // Weekly weather cards
               // Add more cards for other days
             ],
           ),
@@ -107,3 +137,34 @@ class __WeatherBodyState extends State<_WeatherBody> {
   }
 }
 
+
+
+// Widget for individual weather cards
+class WeatherCard extends StatelessWidget {
+  final String day;
+  final IconData icon;
+  final String temperature;
+
+  WeatherCard({required this.day, required this.icon, required this.temperature});
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: () {
+        // Show bottom sheet with more info
+      },
+      child: Card(
+        child: Container(
+          padding: EdgeInsets.all(16.0),
+          child: Column(
+            children: [
+              Text(day),
+              Icon(icon),
+              Text(temperature),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
