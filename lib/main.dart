@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'dart:async';
 import 'settings.dart';
 import 'globals.dart';
+import 'api_service.dart';
 
 void main() {
   runApp(MyWeatherApp());
@@ -45,11 +45,33 @@ class WeatherHomePage extends StatefulWidget {
 }
 
 class _WeatherHomePageState extends State<WeatherHomePage> {
+  final ApiService apiService = ApiService();
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchWeatherData();
+    setState(() {});
+  }
 
   void _update() {
     setState(() {
       
     });
+  }
+
+  Future<void> _fetchWeatherData() async {
+    try {
+      WeatherData weatherData = await apiService.fetchWeatherData();
+      setState(() {
+        // Update your global variables with the fetched data
+        currentTemperature = weatherData.current.temperature2m;
+        currentWindSpeed = weatherData.current.windSpeed10m;
+        currentChanceOfRain = weatherData.current.precipitation; // Example usage
+      });
+    } catch (e) {
+      print('Failed to fetch weather data: $e');
+    }
   }
 
   @override
@@ -70,6 +92,9 @@ class _WeatherHomePageState extends State<WeatherHomePage> {
         ],
       ),
       body: _WeatherBody(),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _fetchWeatherData,
+        child: Icon(Icons.refresh)),
     );
   }
 }
@@ -93,7 +118,7 @@ class __WeatherBodyState extends State<_WeatherBody> {
             children: [
               Text('Wind: ' + currentWindSpeed.toString() + " " + getStringUnitsWind(GlobalWindUnits)),
               Text('Temperature: ' + getTemperatureInCorrectUnits(currentTemperature).toString() + getStringUnitsTemp(GlobalTempretureUnits)),
-              Text('Chance of Rain: ' + getStringUnitsRain(GlobalRainUnits) + "%"),
+              Text('Rainfall: ' + currentChanceOfRain.toString() + getStringUnitsRain(GlobalRainUnits)),
             ],
           ),
         ),
